@@ -11,68 +11,54 @@
 
 <body>
   <main class="container p-20">
-    <div class="row justify-evenly">
-      <div class="profile-container col-3 row justify-evenly">
-        <h2 class="user-full-name card col-11 mb-20 flex true-center" id="userName">Jeff Jefferson</h2>
+    <div class="row justify-evenly main-row">
+      <div class="col-3 row justify-evenly">
+        <h2 class="user-full-name card col-11 mb-20 flex true-center" id="userName"></h2>
         <div class="card col-11">
-          <img src="images/headshot.jpg" alt="Profile Image" class="col-12 mb-20 image profile-image" id="profile-image">
+          <img src="images/headshot.jpg" alt="Profile Image" class="col-12 mb-20 image profile-image" id="profileImage">
           <div class="about-container col-12">
-            <p class="row justify-between"><span class="bold">Age:</span><span id="age">29</span></p>
-            <p class="row justify-between"><span class="bold">Gender:</span><span id="gender">Not Specified</span></p>
-            <p class="row justify-between"><span class="bold">Location:</span><span id="location">United States</span>
+            <p class="row justify-between"><span class="bold">Age:</span><span id="age"></span></p>
+            <p class="row justify-between"><span class="bold">Gender:</span><span id="gender"></span></p>
+            <p class="row justify-between"><span class="bold">Location:</span><span id="location"></span>
             </p>
             <h4>About Me:</h4>
-            <p id="about">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, quos blanditiis numquam fugiat
-              error suscipit voluptas recusandae facere amet sequi quasi perferendis voluptate, aliquam alias quae.
-              Consequuntur saepe, tempora iusto, at animi natus harum autem odit, voluptatem nostrum fugit quibusdam
-              necessitatibus exercitationem non distinctio. Sunt similique soluta libero necessitatibus eaque?</p>
+            <p id="about"></p>
           </div>
         </div>
       </div>
-      <div class="content-container col-8 row align-content-center justify-center">
+      <div class="col-8 row align-content-center justify-center">
         <div class="tab-container col-12 row">
-          <div id="blog" class="tab col-2 flex true-center active">
+          <div id="blogTab" class="tab col-2 flex true-center active">
             <span>Blog</span>
           </div>
-          <div id="images" class="tab col-2 flex true-center">
+          <div id="imagesTab" class="tab col-2 flex true-center">
             <span>Images</span>
           </div>
         </div>
-        <div class="col-12 card row p-20">
-          <div id="blogListContainer" class="col-12">
-          <!-- EXAMPLE BLOG LIST ITEM -->
-          <!--
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, temporibus et ab at nisi itaque deserunt
-              aliquam ratione a iste!
-              <span class="link">see more</span>
-            </p>
-          -->
-          </div>
+        <div class="col-12 card row p-20" id="contentContainer">
           <div id="soloBlogContainer" class="col-12">
-          <!-- EXAMPLE INDIVIDUAL BLOG -->
-          <!--
-            <h1 class="col-12 text-center" id="blogTitle">Diving Deeper Into HTML!</h1>
-            <p>
-              Magni vel ea qui amet temporibus iste corporis ad quasi repellat quod rem, fuga ullam
-              dolorum error molestias odit ipsam modi provident, tempora fugit, molestiae placeat eum dolorem soluta!
-              Optio nobis voluptate natus repellat magnam, soluta aut tempore quis id voluptatum ad quasi tempora nostrum
-              non dolorem quam consectetur dolor earum repudiandae recusandae corrupti?
-            </p>
-          -->
-          </div>
-          <div id="imageListContainer" class="col-12">
-          <!-- EXAMPLE IMAGE LIST ITEM -->
-          <!--
-            <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-list-item">
-          -->
+            <h1 class="col-12 text-center" id="soloBlogTitle"></h1>
+            <p id="soloBlogText"></p>
           </div>
           <div id="soloImageContainer" class="col-12">
-          <!-- EXAMPLE INDIVIDUAL IMAGE -->
-          <!--
-            <img src="images/headshot.jpg" alt="" class="col-12 image solo-image" id="soloImage">
-            <p class="text-center">Business is a dangerous game, but I came prepared.</p>
-          -->
+            <img src="" alt="" class="col-12 image solo-image" id="soloImage">
+            <p class="text-center" id="soloImageDesc">Business is a dangerous game, but I came prepared.</p>
+          </div>
+          <div id="imageListContainer" class="col-12">
+            <!-- EXAMPLE IMAGE LIST ITEM -->
+            <!--
+              <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-list-item">
+            -->
+          </div>
+          <div id="blogListContainer" class="col-12">
+            <!-- EXAMPLE BLOG LIST ITEM -->
+            <!--
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, temporibus et ab at nisi itaque deserunt
+                  aliquam ratione a iste!
+                  <span class="link">see more</span>
+                </p>
+              -->
           </div>
         </div>
       </div>
