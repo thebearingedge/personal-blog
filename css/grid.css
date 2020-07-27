@@ -1,0 +1,179 @@
+
+
+/* LFZ Grid 1.0 */
+
+
+/* The container class creates a fixed size element which
+is used to contain the rows and columns of a grid layout.
+The max-width provides a fixed size which the margin uses
+to center the container element on the page */
+.container {
+    width: 100%;
+    max-width: 1250px;
+    margin: auto;
+}
+
+/* The row class creates an element which is used to contain
+all of the elements of an individual row. For Example: a 3 X 3
+grid would contain 3 rows of 3 elements each. Notice the use
+of display: flex and flex-wrap: wrap which allows the child elements of
+each row to be arranged in a single horizontal line. Also, not the margin
+added to the bottom of each row to space them out. */
+.row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* The column classes are used to dictate how much space in each row
+is taken up by the individual elements. Before we set the widths for
+the individual columns, we want to apply some useful CSS to each of the
+column classes. Note the use of `position: relative` which allows the
+columns to be repositioned, and makes sure that each column properly
+contains any absolutely positioned elements. Also notice the small amount
+of left and right margin which provides even spacing between the elements
+in a row. */
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    margin-right: .5%;
+    margin-left: .5%;
+}
+
+/* You may have noticed that there are 12 column classes, which means that
+this system is designed to allow every row a maximum of 12 columns. So for
+example if we want to have a full row with 3 evenly sized elements, we would
+add the `col-4` class to each of the elements. This would give 4 columns of width
+to each element, which you can see below is just about 33%, minus margin for spacing.
+It is worth noting that many CSS libraries like BootStrap also use a 12 column grid system.
+To make sure that the columns fit properly within each row, we divide 100 by 12
+to get approx 8.33 percent width per column. We then remove 1 percent to allow for
+the margin we added to space the elements out, and we are left with the width percentages
+below. Note that the classes allow you to add the correct width to an element simply by
+adding a class. */
+.col-1 {
+    max-width: 7.33%;
+}
+.col-2 {
+    max-width: 15.66%;
+}
+.col-3 {
+    max-width: 24%;
+}
+.col-4 {
+    max-width: 32.33%;
+}
+.col-5 {
+    max-width: 40.66%;
+}
+.col-6 {
+    max-width: 49%;
+}
+.col-7 {
+    max-width: 57.33%;
+}
+.col-8 {
+    max-width: 65.66%;
+}
+.col-9 {
+    max-width: 74%;
+}
+.col-10 {
+    max-width: 82.33%;
+}
+.col-11 {
+    max-width: 90.66%;
+}
+.col-12 {
+    max-width: 99%;
+}
+
+/* offset classes allow you to add margin to the left side of an element in
+order to allow content to start at any point within the row, or to add additional
+space between elements in a row. You will notice that each offset class is the same
+size as its column equivalent, although, it does not have any size taken away for margin.
+*/
+.offset-1 {
+    margin-left: 8.33%;
+}
+.offset-2 {
+    margin-left: 16.66%;
+}
+.offset-3 {
+    margin-left: 25%;
+}
+.offset-4 {
+    margin-left: 33.33%;
+}
+.offset-5 {
+    margin-left: 41.66%;
+}
+.offset-6 {
+    margin-left: 50%;
+}
+.offset-7 {
+    margin-left: 58.33%;
+}
+.offset-8 {
+    margin-left: 66.66%;
+}
+.offset-9 {
+    margin-left: 75%;
+}
+.offset-10 {
+    margin-left: 83.33%
+}
+.offset-11 {
+    margin-left: 91.66%
+}
+.offset-12 {
+    margin-left: 100%;
+}
+
+/* The media queries below will automatically adjust the set width of the
+container class depending on the size of the current browser window. Notice
+how the containers get smaller as the size of the screen gets smaller. Without
+media queries, building responsive designs is almost impossible, as it is important
+for the content of the website to adapt to the screen it is displayed on. */
+
+@media only screen and (max-width: 1250px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        max-width: 575px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .container {
+        max-width: 500px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .container {
+        max-width: 420px;
+    }
+}

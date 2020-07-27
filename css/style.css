@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-image: url(../images/background.jpeg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.true-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.pb-50 {
+  padding-bottom: 50px;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-content-center {
+  align-content: center;
+}
+
+.text-center {
+  text-align: center;
+  width: 100%;
+}
+
+.user-full-name,
+.tab-container {
+  height: 40px;
+  padding: 0 10px;
+}
+
+.profile-container,
+.content-container {
+  align-self: flex-start;
+}
+
+.user-full-name {
+  margin: 0 0 20px 0;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.image-list-item {
+  height: 250px;
+}
+
+.profile-image {
+  max-height: 300px;
+}
+
+.solo-image {
+  max-height: 800px;
+}
+
+.tab {
+  position: relative;
+  background-color: black;
+  color: white;
+  border-radius: 5% 5% 0 0;
+  overflow: hidden;
+  transition: .5s;
+}
+
+.tab:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+.tab.active {
+  background-color: white;
+  color: black;
+}
+
+.card {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 7px 7px 8px -3px rgba(0,0,0,0.87);
+  overflow: hidden;
+}
+
+.link {
+  color: #003399;
+  text-decoration: underline;
+}
