@@ -7,14 +7,8 @@ var genderElem = document.querySelector("#gender");
 var profileImage = document.querySelector("#profileImage");
 var imagesTab = document.querySelector("#imagesTab");
 var blogTab = document.querySelector("#blogTab");
-var soloImage = document.querySelector("#soloImage");
-var soloImageDesc = document.querySelector("#soloImageDesc");
-var soloBlogTitle = document.querySelector("#soloBlogTitle");
-var soloBlogText = document.querySelector("#soloBlogText");
 var contentContainer = document.querySelector("#contentContainer");
 var blogListContainer = document.querySelector("#blogListContainer");
-var soloBlogContainer = document.querySelector("#soloBlogContainer");
-var soloImageContainer = document.querySelector("#soloImageContainer");
 var imageListContainer = document.querySelector("#imageListContainer");
 var modalElem = document.querySelector("#modal");
 var imageModal = document.querySelector("#imageModal");
@@ -68,7 +62,6 @@ function addImage(){
   var imageFormData = new FormData(imageForm);
   var newImageData = {
     url: imageFormData.get("url"),
-    description: imageFormData.get("description")
   }
 
   userData.images.unshift(newImageData);
@@ -83,7 +76,6 @@ function addImage(){
 function addBlog(){
   var blogFormData = new FormData(blogForm);
   var newBlogData = {
-    title: blogFormData.get("title"),
     body: blogFormData.get("body")
   }
 
@@ -116,8 +108,6 @@ function updateState(newData) {
 function emptyViewContainer() {
   blogListContainer.remove();
   imageListContainer.remove();
-  soloBlogContainer.remove();
-  soloImageContainer.remove();
 }
 
 function removeChildElements(element) {
@@ -132,14 +122,8 @@ function updateView() {
     case "blogList":
       blogListView();
       break;
-    case "soloBlog":
-      soloBlogView();
-      break;
     case "imageList":
       imageListView();
-      break;
-    case "soloImage":
-      soloImageView();
       break;
     default:
       throw new Error("View specified does not exist");
@@ -157,18 +141,8 @@ function blogListView() {
 function createBlogListItem(index) {
   var currentBlog = userData.blogs[index];
   var blogElem = document.createElement("p");
-  blogElem.setAttribute("data-index", index);
-  blogElem.textContent = truncateBlogEntry(currentBlog.body, 20) + " ";
-  var soloBlogLink = document.createElement("span");
-  soloBlogLink.classList.add("link");
-  soloBlogLink.textContent = "See More";
-  soloBlogLink.addEventListener("click", function (event) {
-    updateState({
-      currentSoloBlog: userData.blogs[event.currentTarget.parentElement.dataset.index],
-      currentView: "soloBlog"
-    })
-  })
-  blogElem.append(soloBlogLink);
+  blogElem.classList.add("blog-list-entry")
+  blogElem.textContent = currentBlog.body;
   blogListContainer.append(blogElem);
 }
 
@@ -185,27 +159,8 @@ function createImageListItem(index) {
   var imageElem = document.createElement("img");
   imageElem.setAttribute("src", currentImage.url);
   imageElem.setAttribute("alt", currentImage.description);
-  imageElem.setAttribute("data-index", index);
   imageElem.className = "col-3 mb-20 image image-list-item";
-  imageElem.addEventListener("click", function (event) {
-    updateState({
-      currentView: "soloImage",
-      currentSoloImage: userData.images[event.currentTarget.dataset.index]
-    })
-  })
   imageListContainer.append(imageElem);
-}
-
-function soloBlogView() {
-  soloBlogTitle.textContent = appState.currentSoloBlog.title;
-  soloBlogText.textContent = appState.currentSoloBlog.body;
-  contentContainer.append(soloBlogContainer);
-}
-
-function soloImageView() {
-  soloImage.setAttribute("src", appState.currentSoloImage.url);
-  soloImageDesc.textContent = appState.currentSoloImage.description;
-  contentContainer.append(soloImageContainer);
 }
 
 function toggleTab(event) {
@@ -221,12 +176,4 @@ function toggleTab(event) {
       throw new Error("Specified tab name does not correlate to any known view");
   }
   updateState({ currentView: targetView });
-}
-
-function truncateBlogEntry(blogText, numWords) {
-  var blogWordsArr = blogText.split(" ");
-  if (blogWordsArr.length > numWords) {
-    return blogWordsArr.slice(0, numWords).join(" ") + "...";
-  }
-  return blogWordsArr.join(" ");
 }

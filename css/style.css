@@ -76,6 +76,11 @@ body {
   padding: 0 10px;
 }
 
+.blog-list-entry {
+  padding: 20px 0;
+  border-bottom: 2px solid gray;
+}
+
 .main-row > * {
   align-self: flex-start;
 }
@@ -128,12 +133,6 @@ body {
   border-radius: 5px;
   box-shadow: 7px 7px 8px -3px rgba(0,0,0,0.87);
   overflow: hidden;
-}
-
-.link {
-  color: #003399;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .btn {
