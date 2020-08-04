@@ -14,13 +14,16 @@
     <div class="row justify-evenly main-row">
       <div class="col-3 row justify-evenly">
         <h2 class="user-full-name card col-11 mb-20 flex true-center" id="userName"></h2>
+        <div class="card col-11 mb-20 flex justify-evenly">
+          <button class="btn add-blog" id="addBlogButton">Add Blog Entry</button>
+          <button class="btn add-image" id="addImageButton">Add Image</button>
+        </div>
         <div class="card col-11">
           <img src="images/headshot.jpg" alt="Profile Image" class="col-12 mb-20 image profile-image" id="profileImage">
           <div class="about-container col-12">
             <p class="row justify-between"><span class="bold">Age:</span><span id="age"></span></p>
             <p class="row justify-between"><span class="bold">Gender:</span><span id="gender"></span></p>
-            <p class="row justify-between"><span class="bold">Location:</span><span id="location"></span>
-            </p>
+            <p class="row justify-between"><span class="bold">Location:</span><span id="location"></span></p>
             <h4>About Me:</h4>
             <p id="about"></p>
           </div>
@@ -36,34 +39,42 @@
           </div>
         </div>
         <div class="col-12 card row p-20" id="contentContainer">
-          <div id="soloBlogContainer" class="col-12">
-            <h1 class="col-12 text-center" id="soloBlogTitle"></h1>
-            <p id="soloBlogText"></p>
-          </div>
-          <div id="soloImageContainer" class="col-12">
-            <img src="" alt="" class="col-12 image solo-image" id="soloImage">
-            <p class="text-center" id="soloImageDesc">Business is a dangerous game, but I came prepared.</p>
-          </div>
           <div id="imageListContainer" class="col-12">
             <!-- EXAMPLE IMAGE LIST ITEM -->
             <!--
-              <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-list-item">
-            -->
+                <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-list-item">
+              -->
           </div>
           <div id="blogListContainer" class="col-12">
             <!-- EXAMPLE BLOG LIST ITEM -->
             <!--
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, temporibus et ab at nisi itaque deserunt
-                  aliquam ratione a iste!
-                  <span class="link">see more</span>
-                </p>
-              -->
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, temporibus et ab at nisi itaque deserunt
+                    aliquam ratione a iste!
+                    <span class="link">see more</span>
+                  </p>
+                -->
           </div>
         </div>
       </div>
     </div>
   </main>
+  <div class="modal-container hidden" id="modal">
+    <div class="modal" id="imageModal">
+      <div class="dismiss">X</div>
+      <form id="imageForm">
+        <input class="col-12" type="text" name="url" placeholder="Image Url">
+        <button>Submit</button>
+      </form>
+    </div>
+    <div class="modal" id="blogModal">
+      <div class="dismiss">X</div>
+      <form id="blogForm">
+        <textarea class="col-12" name="body" placeholder="Blog Body"></textarea>
+        <button>Submit</button>
+      </form>
+    </div>
+  </div>
   <script src="js/user-data.js"></script>
   <script src="js/main.js"></script>
 </body>
