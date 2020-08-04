@@ -20,9 +20,7 @@ var addBlogButton = document.querySelector("#addBlogButton");
 var dismissElems = document.querySelectorAll(".dismiss");
 
 var appState = {
-  currentView: "blogList",
-  currentSoloImage: null,
-  currentSoloBlog: null
+  currentView: "blogList"
 }
 
 function init() {
@@ -63,11 +61,8 @@ function addImage(){
   var newImageData = {
     url: imageFormData.get("url"),
   }
-
   userData.images.unshift(newImageData);
-
   toggleModal();
-
   updateState({
     currentView: "imageList"
   })
@@ -78,11 +73,8 @@ function addBlog(){
   var newBlogData = {
     body: blogFormData.get("body")
   }
-
   userData.blogs.unshift(newBlogData);
-
   toggleModal();
-
   updateState({
     currentView: "blogList"
   })
