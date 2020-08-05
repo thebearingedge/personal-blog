@@ -13,35 +13,35 @@
   <main class="container p-20">
     <div class="row justify-evenly main-row">
       <div class="col-3 row justify-evenly">
-        <h2 class="user-full-name card col-11 mb-20 flex true-center" id="userName"></h2>
+        <h2 class="user-full-name card col-11 mb-20 flex true-center" id="profileName"></h2>
         <div class="card col-11 mb-20 flex justify-evenly">
-          <button class="btn add-blog" id="addBlogButton">Add Blog Entry</button>
-          <button class="btn add-image" id="addImageButton">Add Image</button>
+          <button class="btn" id="addPostButton">Add Blog Entry</button>
+          <button class="btn" id="addImageButton">Add Image</button>
         </div>
         <div class="card col-11">
           <img src="images/headshot.jpg" alt="Profile Image" class="col-12 mb-20 image profile-image" id="profileImage">
           <div class="about-container col-12">
-            <p class="row justify-between"><span class="bold">Age:</span><span id="age"></span></p>
-            <p class="row justify-between"><span class="bold">Gender:</span><span id="gender"></span></p>
-            <p class="row justify-between"><span class="bold">Location:</span><span id="location"></span></p>
+            <p class="row justify-between"><span class="bold">Age:</span><span id="profileAge"></span></p>
+            <p class="row justify-between"><span class="bold">Gender:</span><span id="profileGender"></span></p>
+            <p class="row justify-between"><span class="bold">Location:</span><span id="profileLocation"></span></p>
             <h4>About Me:</h4>
-            <p id="about"></p>
+            <p id="profileAbout"></p>
           </div>
         </div>
       </div>
       <div class="col-8 row align-content-center justify-center">
-        <div class="tab-container col-12 row" id="tabNav">
-          <div id="blogTab" class="tab col-2 flex true-center active">Blog</div>
-          <div id="imagesTab" class="tab col-2 flex true-center">Images</div>
+        <div class="tab-container col-12 row" id="tabsContainer">
+          <div id="postsTab" class="tab col-2 flex true-center active">Posts</div>
+          <div id="imageGalleryTab" class="tab col-2 flex true-center">Images</div>
         </div>
         <div class="col-12 card row p-20" id="contentContainer">
-          <div id="imageListContainer" class="col-12">
+          <div id="imageGallery" class="col-12">
             <!-- EXAMPLE IMAGE LIST ITEM -->
             <!--
-                <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-list-item">
+                <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-gallery-item">
               -->
           </div>
-          <div id="blogListContainer" class="col-12">
+          <div id="posts" class="col-12">
             <!-- EXAMPLE BLOG LIST ITEM -->
             <!--
                   <p>
@@ -63,10 +63,10 @@
         <button class="btn">Submit</button>
       </form>
     </div>
-    <div class="modal" id="blogModal">
+    <div class="modal" id="postModal">
       <div class="dismiss">X</div>
-      <form id="blogForm">
-        <textarea class="col-12" name="body" placeholder="Blog Body"></textarea>
+      <form id="postForm">
+        <textarea class="col-12" name="body" placeholder="Post Body"></textarea>
         <button class="btn">Submit</button>
       </form>
     </div>

@@ -82,7 +82,7 @@ input {
   padding: 0 10px;
 }
 
-.blog-list-entry {
+.post {
   padding: 20px 0;
   border-bottom: 2px solid gray;
 }
@@ -100,16 +100,12 @@ input {
   object-position: center;
 }
 
-.image-list-item {
+.image-gallery-item {
   height: 250px;
 }
 
 .profile-image {
   max-height: 300px;
-}
-
-.solo-image {
-  max-height: 800px;
 }
 
 .tab {
