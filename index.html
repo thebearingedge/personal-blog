@@ -15,7 +15,7 @@
       <div class="col-3 row justify-evenly">
         <h2 class="user-full-name card col-11 mb-20 flex true-center" id="profileName"></h2>
         <div class="card col-11 mb-20 flex justify-evenly">
-          <button class="btn" id="addArticleButton">Add Blog Entry</button>
+          <button class="btn" id="addPostButton">Add Blog Entry</button>
           <button class="btn" id="addImageButton">Add Image</button>
         </div>
         <div class="card col-11">
@@ -31,7 +31,7 @@
       </div>
       <div class="col-8 row align-content-center justify-center">
         <div class="tab-container col-12 row" id="tabsContainer">
-          <div id="articlesTab" class="tab col-2 flex true-center active">Articles</div>
+          <div id="postsTab" class="tab col-2 flex true-center active">Posts</div>
           <div id="imageGalleryTab" class="tab col-2 flex true-center">Images</div>
         </div>
         <div class="col-12 card row p-20" id="contentContainer">
@@ -41,7 +41,7 @@
                 <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-gallery-item">
               -->
           </div>
-          <div id="articles" class="col-12">
+          <div id="posts" class="col-12">
             <!-- EXAMPLE BLOG LIST ITEM -->
             <!--
                   <p>
@@ -63,10 +63,10 @@
         <button class="btn">Submit</button>
       </form>
     </div>
-    <div class="modal" id="articleModal">
+    <div class="modal" id="postModal">
       <div class="dismiss">X</div>
-      <form id="articleForm">
-        <textarea class="col-12" name="body" placeholder="Article Body"></textarea>
+      <form id="postForm">
+        <textarea class="col-12" name="body" placeholder="Post Body"></textarea>
         <button class="btn">Submit</button>
       </form>
     </div>

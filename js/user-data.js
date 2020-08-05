@@ -9,7 +9,7 @@ var userData = {
     location: "United States",
     about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quis. Cumque nobis mollitia, error ullam iure accusantium autem, distinctio quaerat aliquid alias non maxime numquam impedit dolorum magni beatae iusto nihil illo, ipsam sunt nisi! Sunt corrupti nulla quaerat a?"
   },
-  articles: [
+  posts: [
     {
       title: "Digging deeper into HTML!",
       body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur commodi necessitatibus quisquam eius veniam a reiciendis rerum cumque optio aspernatur?"

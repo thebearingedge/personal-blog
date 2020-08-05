@@ -7,55 +7,55 @@ var profileGender = document.querySelector("#profileGender");
 var profileImage = document.querySelector("#profileImage");
 var tabsContainer = document.querySelector("#tabsContainer");
 var contentContainer = document.querySelector("#contentContainer");
-var articles = document.querySelector("#articles");
+var posts = document.querySelector("#posts");
 var imageGallery = document.querySelector("#imageGallery");
 var modal = document.querySelector("#modal");
 var imageModal = document.querySelector("#imageModal");
-var articleModal = document.querySelector("#articleModal");
+var postModal = document.querySelector("#postModal");
 var imageForm = document.querySelector("#imageForm");
-var articleForm = document.querySelector("#articleForm");
+var postForm = document.querySelector("#postForm");
 var addImageButton = document.querySelector("#addImageButton");
-var addArticleButton = document.querySelector("#addArticleButton");
+var addPostButton = document.querySelector("#addPostButton");
 var dismisQUOTEbuttonsQUOTElelele = document.querySelectorAll(".dismiss");
 
 init();
 
 function init() {
   tabsContainer.addEventListener("click", activateTab);
-  addArticleButton.addEventListener("click", showArticleModal);
+  addPostButton.addEventListener("click", showPostModal);
   addImageButton.addEventListener("click", showImageModal);
   imageForm.addEventListener("submit", addImage);
-  articleForm.addEventListener("submit", addArticle);
+  postForm.addEventListener("submit", addPost);
 
   for(var i = 0; i < dismisQUOTEbuttonsQUOTElelele.length; i++){
     dismisQUOTEbuttonsQUOTElelele[i].addEventListener("click", toggleModal);
   }
 
   populateProfile();
-  renderArticles();
+  renderPosts();
   renderImageList();
-  showArticles();
+  showPosts();
 }
 
-function showArticles(){
+function showPosts(){
   imageGallery.remove();
-  contentContainer.append(articles);
+  contentContainer.append(posts);
 }
 
 function showImageGallery(){
-  articles.remove();
+  posts.remove();
   contentContainer.append(imageGallery);
 }
 
 function toggleModal(){
   modal.classList.toggle("hidden");
   imageModal.remove();
-  articleModal.remove();
+  postModal.remove();
 }
 
-function showArticleModal(){
+function showPostModal(){
   toggleModal();
-  modal.append(articleModal);
+  modal.append(postModal);
 }
 
 function showImageModal(){
@@ -74,15 +74,15 @@ function addImage(){
   showImageGallery();
 }
 
-function addArticle(){
-  var articleFormData = new FormData(articleForm);
-  var newArticle = {
-    body: articleFormData.get("body")
+function addPost(){
+  var postFormData = new FormData(postForm);
+  var newPost = {
+    body: postFormData.get("body")
   }
-  userData.articles.push(newArticle);
-  renderArticle(newArticle);
+  userData.posts.push(newPost);
+  renderPost(newPost);
   toggleModal();
-  showArticles();
+  showPosts();
 }
 
 function populateProfile() {
@@ -95,9 +95,9 @@ function populateProfile() {
   profileImage.setAttribute("src", profile.imageUrl);
 }
 
-function renderArticles() {
-  for (var i = 0; i < userData.articles.length; i++) {
-    renderArticle(userData.articles[i]);
+function renderPosts() {
+  for (var i = 0; i < userData.posts.length; i++) {
+    renderPost(userData.posts[i]);
   }
 }
 
@@ -107,11 +107,11 @@ function renderImageList() {
   }
 }
 
-function renderArticle(article) {
-  var articleBody = document.createElement("p");
-  articleBody.classList.add("article")
-  articleBody.textContent = article.body;
-  articles.prepend(articleBody);
+function renderPost(post) {
+  var postBody = document.createElement("p");
+  postBody.classList.add("post")
+  postBody.textContent = post.body;
+  posts.prepend(postBody);
 }
 
 function renderImage(image) {
@@ -130,8 +130,8 @@ function activateTab(event) {
   event.target.classList.add("active");
 
   switch(event.target.id){
-    case "articlesTab":
-      showArticles();
+    case "postsTab":
+      showPosts();
       break;
     case "imageGalleryTab":
       showImageGallery();
