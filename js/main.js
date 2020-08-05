@@ -5,8 +5,7 @@ var ageElem = document.querySelector("#age");
 var locationElem = document.querySelector("#location");
 var genderElem = document.querySelector("#gender");
 var profileImage = document.querySelector("#profileImage");
-var imagesTab = document.querySelector("#imagesTab");
-var blogTab = document.querySelector("#blogTab");
+var tabNav = document.querySelector("#tabNav");
 var contentContainer = document.querySelector("#contentContainer");
 var blogListContainer = document.querySelector("#blogListContainer");
 var imageListContainer = document.querySelector("#imageListContainer");
@@ -19,13 +18,10 @@ var addImageButton = document.querySelector("#addImageButton");
 var addBlogButton = document.querySelector("#addBlogButton");
 var dismissElems = document.querySelectorAll(".dismiss");
 
-var appState = {
-  currentView: "blogList"
-}
+init();
 
 function init() {
-  blogTab.addEventListener("click", toggleTab);
-  imagesTab.addEventListener("click", toggleTab);
+  tabNav.addEventListener("click", toggleTab);
   addBlogButton.addEventListener("click", showBlogModal);
   addImageButton.addEventListener("click", showImageModal);
   imageForm.addEventListener("submit", addImage);
@@ -35,10 +31,20 @@ function init() {
     dismissElems[i].addEventListener("click", toggleModal);
   }
   updateProfile();
-  updateView();
+  createBlogList();
+  createImageList();
+  showBlogList();
 }
 
-init();
+function showBlogList(){
+  imageListContainer.remove();
+  contentContainer.append(blogListContainer);
+}
+
+function showImageList(){
+  blogListContainer.remove();
+  contentContainer.append(imageListContainer);
+}
 
 function toggleModal(){
   modalElem.classList.toggle("hidden");
@@ -61,11 +67,10 @@ function addImage(){
   var newImageData = {
     url: imageFormData.get("url"),
   }
-  userData.images.unshift(newImageData);
+  userData.images.push(newImageData);
+  createImageListItem(newImageData);
   toggleModal();
-  updateState({
-    currentView: "imageList"
-  })
+  showImageList();
 }
 
 function addBlog(){
@@ -73,11 +78,10 @@ function addBlog(){
   var newBlogData = {
     body: blogFormData.get("body")
   }
-  userData.blogs.unshift(newBlogData);
+  userData.blogs.push(newBlogData);
+  createBlogListItem(newBlogData);
   toggleModal();
-  updateState({
-    currentView: "blogList"
-  })
+  showBlogList();
 }
 
 function updateProfile() {
@@ -90,82 +94,43 @@ function updateProfile() {
   profileImage.setAttribute("src", user.imageUrl);
 }
 
-function updateState(newData) {
-  for (var key in newData) {
-    appState[key] = newData[key];
-  }
-  updateView();
-}
-
-function emptyViewContainer() {
-  blogListContainer.remove();
-  imageListContainer.remove();
-}
-
-function removeChildElements(element) {
-  while (element.lastChild) {
-    element.lastChild.remove();
-  }
-}
-
-function updateView() {
-  emptyViewContainer();
-  switch (appState.currentView) {
-    case "blogList":
-      blogListView();
-      break;
-    case "imageList":
-      imageListView();
-      break;
-    default:
-      throw new Error("View specified does not exist");
-  }
-}
-
-function blogListView() {
-  removeChildElements(blogListContainer)
+function createBlogList() {
   for (var i = 0; i < userData.blogs.length; i++) {
-    createBlogListItem(i);
+    createBlogListItem(userData.blogs[i]);
   }
-  contentContainer.append(blogListContainer);
 }
 
-function createBlogListItem(index) {
-  var currentBlog = userData.blogs[index];
+function createImageList() {
+  for (var i = 0; i < userData.images.length; i++) {
+    createImageListItem(userData.images[i]);
+  }
+}
+
+function createBlogListItem(blog) {
   var blogElem = document.createElement("p");
   blogElem.classList.add("blog-list-entry")
-  blogElem.textContent = currentBlog.body;
-  blogListContainer.append(blogElem);
+  blogElem.textContent = blog.body;
+  blogListContainer.prepend(blogElem);
 }
 
-function imageListView() {
-  removeChildElements(imageListContainer)
-  for (var i = 0; i < userData.images.length; i++) {
-    createImageListItem(i);
-  }
-  contentContainer.append(imageListContainer);
-}
-
-function createImageListItem(index) {
-  var currentImage = userData.images[index];
+function createImageListItem(image) {
   var imageElem = document.createElement("img");
-  imageElem.setAttribute("src", currentImage.url);
-  imageElem.setAttribute("alt", currentImage.description);
+  imageElem.setAttribute("src", image.url);
   imageElem.className = "col-3 mb-20 image image-list-item";
-  imageListContainer.append(imageElem);
+  imageListContainer.prepend(imageElem);
 }
 
 function toggleTab(event) {
-  var targetView = null;
-  switch (event.currentTarget.id) {
-    case "blogTab":
-      targetView = "blogList";
-      break;
-    case "imagesTab":
-      targetView = "imageList"
-      break;
-    default:
-      throw new Error("Specified tab name does not correlate to any known view");
+  if(!event.target.className.includes("tab")){
+    return;
   }
-  updateState({ currentView: targetView });
+
+  document.querySelector(".active").classList.remove("active");
+  event.target.classList.add("active");
+
+  if(event.target.textContent === "Blog"){
+    showBlogList();
+  } else {
+    showImageList();
+  }
 }
