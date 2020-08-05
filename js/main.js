@@ -128,9 +128,12 @@ function toggleTab(event) {
   document.querySelector(".active").classList.remove("active");
   event.target.classList.add("active");
 
-  if(event.target.textContent === "Blog"){
-    showBlogList();
-  } else {
-    showImageList();
+  switch(event.target.id){
+    case "blogTab":
+      showBlogList();
+      break;
+    case "imagesTab":
+      showImageList();
+      break;
   }
 }
