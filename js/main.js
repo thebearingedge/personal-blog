@@ -1,65 +1,66 @@
-/* eslint-disable no-undef */
-var userNameElem = document.querySelector("#userName");
-var aboutElem = document.querySelector("#about");
-var ageElem = document.querySelector("#age");
-var locationElem = document.querySelector("#location");
-var genderElem = document.querySelector("#gender");
+/* global userData */
+var profileName = document.querySelector("#profileName");
+var profileAbout = document.querySelector("#profileAbout");
+var profileAge = document.querySelector("#profileAge");
+var profileLocation = document.querySelector("#profileLocation");
+var profileGender = document.querySelector("#profileGender");
 var profileImage = document.querySelector("#profileImage");
-var tabNav = document.querySelector("#tabNav");
+var tabsContainer = document.querySelector("#tabsContainer");
 var contentContainer = document.querySelector("#contentContainer");
-var blogListContainer = document.querySelector("#blogListContainer");
-var imageListContainer = document.querySelector("#imageListContainer");
-var modalElem = document.querySelector("#modal");
+var articles = document.querySelector("#articles");
+var imageGallery = document.querySelector("#imageGallery");
+var modal = document.querySelector("#modal");
 var imageModal = document.querySelector("#imageModal");
-var blogModal = document.querySelector("#blogModal");
+var articleModal = document.querySelector("#articleModal");
 var imageForm = document.querySelector("#imageForm");
-var blogForm = document.querySelector("#blogForm");
+var articleForm = document.querySelector("#articleForm");
 var addImageButton = document.querySelector("#addImageButton");
-var addBlogButton = document.querySelector("#addBlogButton");
-var dismissElems = document.querySelectorAll(".dismiss");
+var addArticleButton = document.querySelector("#addArticleButton");
+var dismisQUOTEbuttonsQUOTElelele = document.querySelectorAll(".dismiss");
 
 init();
 
 function init() {
-  tabNav.addEventListener("click", toggleTab);
-  addBlogButton.addEventListener("click", showBlogModal);
+  tabsContainer.addEventListener("click", activateTab);
+  addArticleButton.addEventListener("click", showArticleModal);
   addImageButton.addEventListener("click", showImageModal);
   imageForm.addEventListener("submit", addImage);
-  blogForm.addEventListener("submit", addBlog);
+  articleForm.addEventListener("submit", addArticle);
 
-  for(var i = 0; i < dismissElems.length; i++){
-    dismissElems[i].addEventListener("click", toggleModal);
+  for(var i = 0; i < dismisQUOTEbuttonsQUOTElelele.length; i++){
+    dismisQUOTEbuttonsQUOTElelele[i].addEventListener("click", toggleModal);
   }
-  updateProfile();
-  createBlogList();
-  createImageList();
-  showBlogList();
+
+  populateProfile();
+  renderArticles();
+  renderImageList();
+  showArticles();
 }
 
-function showBlogList(){
-  imageListContainer.remove();
-  contentContainer.append(blogListContainer);
+function showArticles(){
+  imageGallery.remove();
+  contentContainer.append(articles);
 }
 
-function showImageList(){
-  blogListContainer.remove();
-  contentContainer.append(imageListContainer);
+function showImageGallery(){
+  articles.remove();
+  contentContainer.append(imageGallery);
 }
 
 function toggleModal(){
-  modalElem.classList.toggle("hidden");
+  modal.classList.toggle("hidden");
   imageModal.remove();
-  blogModal.remove();
+  articleModal.remove();
 }
 
-function showBlogModal(){
+function showArticleModal(){
   toggleModal();
-  modalElem.append(blogModal);
+  modal.append(articleModal);
 }
 
 function showImageModal(){
   toggleModal();
-  modalElem.append(imageModal);
+  modal.append(imageModal);
 }
 
 function addImage(){
@@ -68,72 +69,72 @@ function addImage(){
     url: imageFormData.get("url"),
   }
   userData.images.push(newImageData);
-  createImageListItem(newImageData);
+  renderImage(newImageData);
   toggleModal();
-  showImageList();
+  showImageGallery();
 }
 
-function addBlog(){
-  var blogFormData = new FormData(blogForm);
-  var newBlogData = {
-    body: blogFormData.get("body")
+function addArticle(){
+  var articleFormData = new FormData(articleForm);
+  var newArticle = {
+    body: articleFormData.get("body")
   }
-  userData.blogs.push(newBlogData);
-  createBlogListItem(newBlogData);
+  userData.articles.push(newArticle);
+  renderArticle(newArticle);
   toggleModal();
-  showBlogList();
+  showArticles();
 }
 
-function updateProfile() {
-  var user = userData.profile;
-  ageElem.textContent = user.age;
-  genderElem.textContent = user.gender;
-  locationElem.textContent = user.location;
-  userNameElem.textContent = user.firstName + " " + user.lastName;
-  aboutElem.textContent = user.about;
-  profileImage.setAttribute("src", user.imageUrl);
+function populateProfile() {
+  var profile = userData.profile;
+  profileAge.textContent = profile.age;
+  profileGender.textContent = profile.gender;
+  profileLocation.textContent = profile.location;
+  profileName.textContent = profile.firstName + " " + profile.lastName;
+  profileAbout.textContent = profile.about;
+  profileImage.setAttribute("src", profile.imageUrl);
 }
 
-function createBlogList() {
-  for (var i = 0; i < userData.blogs.length; i++) {
-    createBlogListItem(userData.blogs[i]);
+function renderArticles() {
+  for (var i = 0; i < userData.articles.length; i++) {
+    renderArticle(userData.articles[i]);
   }
 }
 
-function createImageList() {
+function renderImageList() {
   for (var i = 0; i < userData.images.length; i++) {
-    createImageListItem(userData.images[i]);
+    renderImage(userData.images[i]);
   }
 }
 
-function createBlogListItem(blog) {
-  var blogElem = document.createElement("p");
-  blogElem.classList.add("blog-list-entry")
-  blogElem.textContent = blog.body;
-  blogListContainer.prepend(blogElem);
+function renderArticle(article) {
+  var articleBody = document.createElement("p");
+  articleBody.classList.add("article")
+  articleBody.textContent = article.body;
+  articles.prepend(articleBody);
 }
 
-function createImageListItem(image) {
-  var imageElem = document.createElement("img");
-  imageElem.setAttribute("src", image.url);
-  imageElem.className = "col-3 mb-20 image image-list-item";
-  imageListContainer.prepend(imageElem);
+function renderImage(image) {
+  var imageElement = document.createElement("img");
+  imageElement.setAttribute("src", image.url);
+  imageElement.className = "col-3 mb-20 image image-gallery-item";
+  imageGallery.prepend(imageElement);
 }
 
-function toggleTab(event) {
+function activateTab(event) {
   if(!event.target.className.includes("tab")){
     return;
   }
 
-  document.querySelector(".active").classList.remove("active");
+  document.querySelector(".tab.active").classList.remove("active");
   event.target.classList.add("active");
 
   switch(event.target.id){
-    case "blogTab":
-      showBlogList();
+    case "articlesTab":
+      showArticles();
       break;
-    case "imagesTab":
-      showImageList();
+    case "imageGalleryTab":
+      showImageGallery();
       break;
   }
 }
