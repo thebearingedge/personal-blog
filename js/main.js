@@ -32,8 +32,8 @@ function init() {
   }
 
   populateProfile();
-  renderPosts();
-  renderImageList();
+  renderAllPosts();
+  renderAllImages();
   showPosts();
 }
 
@@ -76,11 +76,12 @@ function addImage(){
 
 function addPost(){
   var postFormData = new FormData(postForm);
-  var newPost = {
+  var postData = {
     body: postFormData.get("body")
   }
-  userData.posts.push(newPost);
-  renderPost(newPost);
+  userData.posts.push(postData);
+  var postElement = renderPost(postData);
+  posts.prepend(postElement);
   toggleModal();
   showPosts();
 }
@@ -95,30 +96,32 @@ function populateProfile() {
   profileImage.setAttribute("src", profile.imageUrl);
 }
 
-function renderPosts() {
+function renderAllPosts() {
   for (var i = 0; i < userData.posts.length; i++) {
-    renderPost(userData.posts[i]);
+    var postElement = renderPost(userData.posts[i]);
+    posts.prepend(postElement)
   }
 }
 
-function renderImageList() {
+function renderAllImages() {
   for (var i = 0; i < userData.images.length; i++) {
-    renderImage(userData.images[i]);
+    var imageElement = renderImage(userData.images[i]);
+    imageGallery.prepend(imageElement)
   }
 }
 
 function renderPost(post) {
-  var postBody = document.createElement("p");
-  postBody.classList.add("post")
-  postBody.textContent = post.body;
-  posts.prepend(postBody);
+  var postElement = document.createElement("p");
+  postElement.classList.add("post")
+  postElement.textContent = post.body;
+  return postElement
 }
 
 function renderImage(image) {
   var imageElement = document.createElement("img");
   imageElement.setAttribute("src", image.url);
   imageElement.className = "col-3 mb-20 image image-gallery-item";
-  imageGallery.prepend(imageElement);
+  return imageElement
 }
 
 function activateTab(event) {
