@@ -19,10 +19,9 @@ init();
 
 function init() {
   tabsContainer.addEventListener("click", function (event) {
-    if (!event.target.classList.contains("tab")) {
-      return;
+    if (event.target.classList.contains("tab")) {
+      activateTab(event.target.dataset.content);
     }
-    activateTab(event.target.dataset.content);
   });
   addPostButton.addEventListener("click", function () {
     showModal("postModal");
