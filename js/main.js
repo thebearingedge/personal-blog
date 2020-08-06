@@ -110,19 +110,14 @@ function renderImage(image) {
 }
 
 function activateTab(type) {
-  for (var tabsIndex = 0; tabsIndex < tabsContainer.children.length; tabsIndex++) {
-    var tabsChild = tabsContainer.children[tabsIndex];
+  for (var i = 0; i < tabsContainer.children.length; i++) {
+    var tabsChild = tabsContainer.children[i];
+    var contentChild = contentContainer.children[i];
     if (tabsChild.dataset.content === type) {
       tabsChild.classList.add("active");
-    } else {
-      tabsChild.classList.remove("active");
-    }
-  }
-  for (var contentIndex = 0; contentIndex < contentContainer.children.length; contentIndex++) {
-    var contentChild = contentContainer.children[contentIndex];
-    if (contentChild.dataset.content === type) {
       contentChild.classList.remove("hidden");
     } else {
+      tabsChild.classList.remove("active");
       contentChild.classList.add("hidden");
     }
   }
