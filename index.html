@@ -31,17 +31,11 @@
       </div>
       <div class="col-8 row align-content-center justify-center">
         <div class="tab-container col-12 row" id="tabsContainer">
-          <div id="postsTab" class="tab col-2 flex true-center active">Posts</div>
-          <div id="imageGalleryTab" class="tab col-2 flex true-center">Images</div>
+          <div id="postsTab" data-content="posts" class="tab col-2 flex true-center active">Posts</div>
+          <div id="imageGalleryTab" data-content="imageGallery" class="tab col-2 flex true-center">Images</div>
         </div>
         <div class="col-12 card row p-20" id="contentContainer">
-          <div id="imageGallery" class="col-12">
-            <!-- EXAMPLE IMAGE LIST ITEM -->
-            <!--
-                <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-gallery-item">
-              -->
-          </div>
-          <div id="posts" class="col-12">
+          <div id="posts" data-content="posts" class="col-12">
             <!-- EXAMPLE BLOG LIST ITEM -->
             <!--
                   <p>
@@ -51,15 +45,21 @@
                   </p>
                 -->
           </div>
+          <div id="imageGallery" data-content="imageGallery" class="col-12">
+            <!-- EXAMPLE IMAGE LIST ITEM -->
+            <!--
+                          <img src="images/headshot.jpg" alt="" class="col-3 mb-20 image image-gallery-item">
+                        -->
+          </div>
         </div>
       </div>
     </div>
   </main>
-  <div class="modal-container hidden" id="modal">
+  <div class="modal-container hidden" id="modalContainer">
     <div class="modal" id="imageModal">
       <div class="dismiss">X</div>
       <form id="imageForm">
-        <input class="col-12" type="text" name="url" placeholder="Image Url">
+        <input class="col-12" type="url" name="url" placeholder="Image Url">
         <button class="btn">Submit</button>
       </form>
     </div>

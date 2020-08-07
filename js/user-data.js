@@ -41,4 +41,4 @@ var userData = {
       url: "images/headshot.jpg"
     }
   ]
-}
+};

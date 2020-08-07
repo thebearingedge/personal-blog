@@ -9,81 +9,65 @@ var tabsContainer = document.querySelector("#tabsContainer");
 var contentContainer = document.querySelector("#contentContainer");
 var posts = document.querySelector("#posts");
 var imageGallery = document.querySelector("#imageGallery");
-var modal = document.querySelector("#modal");
-var imageModal = document.querySelector("#imageModal");
-var postModal = document.querySelector("#postModal");
+var modalContainer = document.querySelector("#modalContainer");
 var imageForm = document.querySelector("#imageForm");
 var postForm = document.querySelector("#postForm");
 var addImageButton = document.querySelector("#addImageButton");
 var addPostButton = document.querySelector("#addPostButton");
-var dismisQUOTEbuttonsQUOTElelele = document.querySelectorAll(".dismiss");
 
 init();
 
 function init() {
-  tabsContainer.addEventListener("click", activateTab);
-  addPostButton.addEventListener("click", showPostModal);
-  addImageButton.addEventListener("click", showImageModal);
-  imageForm.addEventListener("submit", addImage);
+  tabsContainer.addEventListener("click", function (event) {
+    if (event.target.classList.contains("tab")) {
+      activateTab(event.target.dataset.content);
+    }
+  });
+  addPostButton.addEventListener("click", function () {
+    showModal("postModal");
+  });
+  addImageButton.addEventListener("click", function () {
+    showModal("imageModal");
+  });
   postForm.addEventListener("submit", addPost);
-
-  for(var i = 0; i < dismisQUOTEbuttonsQUOTElelele.length; i++){
-    dismisQUOTEbuttonsQUOTElelele[i].addEventListener("click", toggleModal);
-  }
-
+  imageForm.addEventListener("submit", addImage);
+  modalContainer.addEventListener("click", function (event) {
+    if (event.target.classList.contains("dismiss")) {
+      hideModal();
+    }
+  });
   populateProfile();
   renderAllPosts();
   renderAllImages();
-  showPosts();
+  activateTab("posts");
 }
 
-function showPosts(){
-  imageGallery.remove();
-  contentContainer.append(posts);
-}
-
-function showImageGallery(){
-  posts.remove();
-  contentContainer.append(imageGallery);
-}
-
-function toggleModal(){
-  modal.classList.toggle("hidden");
-  imageModal.remove();
-  postModal.remove();
-}
-
-function showPostModal(){
-  toggleModal();
-  modal.append(postModal);
-}
-
-function showImageModal(){
-  toggleModal();
-  modal.append(imageModal);
-}
-
-function addImage(){
-  var imageFormData = new FormData(imageForm);
+function addImage(event) {
+  event.preventDefault();
+  var imageFormData = new FormData(event.target);
   var newImageData = {
     url: imageFormData.get("url"),
-  }
+  };
   userData.images.push(newImageData);
-  renderImage(newImageData);
-  toggleModal();
-  showImageGallery();
+  var imageElement = renderImage(newImageData);
+  imageGallery.prepend(imageElement);
+  event.target.reset();
+  hideModal();
+  activateTab("imageGallery");
 }
 
-function addPost(){
-  var postFormData = new FormData(postForm);
+function addPost(event) {
+  event.preventDefault();
+  var postFormData = new FormData(event.target);
   var postData = {
     body: postFormData.get("body")
-  }
+  };
   userData.posts.push(postData);
   var postElement = renderPost(postData);
   posts.prepend(postElement);
-  toggleModal();
-  showPosts();
+  event.target.reset();
+  hideModal();
+  activateTab("posts");
 }
 
 function populateProfile() {
@@ -99,45 +83,57 @@ function populateProfile() {
 function renderAllPosts() {
   for (var i = 0; i < userData.posts.length; i++) {
     var postElement = renderPost(userData.posts[i]);
-    posts.prepend(postElement)
+    posts.prepend(postElement);
   }
 }
 
 function renderAllImages() {
   for (var i = 0; i < userData.images.length; i++) {
     var imageElement = renderImage(userData.images[i]);
-    imageGallery.prepend(imageElement)
+    imageGallery.prepend(imageElement);
   }
 }
 
 function renderPost(post) {
   var postElement = document.createElement("p");
-  postElement.classList.add("post")
+  postElement.classList.add("post");
   postElement.textContent = post.body;
-  return postElement
+  return postElement;
 }
 
 function renderImage(image) {
   var imageElement = document.createElement("img");
   imageElement.setAttribute("src", image.url);
   imageElement.className = "col-3 mb-20 image image-gallery-item";
-  return imageElement
+  return imageElement;
 }
 
-function activateTab(event) {
-  if(!event.target.className.includes("tab")){
-    return;
+function activateTab(type) {
+  for (var i = 0; i < tabsContainer.children.length; i++) {
+    var tabsChild = tabsContainer.children[i];
+    var contentChild = contentContainer.children[i];
+    if (tabsChild.dataset.content === type) {
+      tabsChild.classList.add("active");
+      contentChild.classList.remove("hidden");
+    } else {
+      tabsChild.classList.remove("active");
+      contentChild.classList.add("hidden");
+    }
   }
+}
 
-  document.querySelector(".tab.active").classList.remove("active");
-  event.target.classList.add("active");
-
-  switch(event.target.id){
-    case "postsTab":
-      showPosts();
-      break;
-    case "imageGalleryTab":
-      showImageGallery();
-      break;
+function showModal(type) {
+  modalContainer.classList.remove("hidden");
+  for (var i = 0; i < modalContainer.children.length; i++) {
+    var child = modalContainer.children[i];
+    if (child.id === type) {
+      child.classList.remove("hidden");
+    } else {
+      child.classList.add("hidden");
+    }
   }
+}
+
+function hideModal() {
+  modalContainer.classList.add("hidden");
 }
